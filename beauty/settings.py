@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*)$!nui4vi4ilgp13gd5+ep+=&8-27$9%i4iy!+#29$mjer1kb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['92a0-177-72-216-245.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['790e-177-72-216-245.ngrok.io', '127.0.0.1']
 
 
 # Application definition
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
-    'users'
+    'users',
+    'estabelecimentos'
 ]
 
 REST_FRAMEWORK = {
