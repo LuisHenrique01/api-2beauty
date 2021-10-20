@@ -4,7 +4,7 @@ from estabelecimentos.models import Estabelecimento
 
 class EstabelecimentoSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-
+    
     class Meta:
         model = Estabelecimento
         fields = '__all__'
