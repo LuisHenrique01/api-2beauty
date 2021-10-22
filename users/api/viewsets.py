@@ -1,6 +1,5 @@
 from rest_framework import generics, permissions
 from django.contrib.auth.models import User
-from django.http import Response
 from .serializers import UserCreateSerializer, UserDetailSerializer, UserChangePasswordSerializer
 
 
