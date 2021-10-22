@@ -25,11 +25,11 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Snippets API",
+      title="2Beauty API",
       default_version='v1',
-      description="Test description",
+      description="Essa API foi desenvolvida única e exclusivamente para a aplicação móvel e descktop do 2Beauty.",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
+      contact=openapi.Contact(email="luisrocha1201@gmail.local"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,

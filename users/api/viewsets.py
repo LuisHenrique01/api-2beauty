@@ -12,10 +12,8 @@ class UserCreate(generics.CreateAPIView):
 class UserChangePassword(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserChangePasswordSerializer
-    permission_classes = [permissions.AllowAny]
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
-    permission_classes = [permissions.AllowAny]
