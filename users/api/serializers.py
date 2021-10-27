@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from users.models import Proprietario
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,3 +33,17 @@ class UserDetailSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.set_password(validated_data.get('password'))
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'email']
+
+
+class ProprietarioSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Proprietario
+        fields = '__all__'

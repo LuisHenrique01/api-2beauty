@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import Proprietario
 # Create your models here.
 
 
 class Estabelecimento(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='estabelecimentos')
+    proprietario = models.ForeignKey(Proprietario, on_delete=models.CASCADE, related_name='estabelecimentos')
     nome = models.CharField('Nome', max_length=250)
+    cnpj = models.CharField('CNPJ', max_length=25)
     cidade = models.CharField('Cidade', max_length=250)
     bairro = models.CharField('bairro', max_length=250)
     rua = models.CharField('Rua', max_length=250)
