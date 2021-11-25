@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
-from estabelecimentos.models import Estabelecimento
-from .serializers import EstabelecimentoSerializer
+from estabelecimentos.models import Estabelecimento, Servico
+from .serializers import EstabelecimentoSerializer, ServicoSerializer
 from users.models import Proprietario
+
 
 class EstabelecimentoViewSet(viewsets.ModelViewSet):
     queryset = Estabelecimento.objects.all()
@@ -20,3 +21,9 @@ class EstabelecimentoViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class ServicoViewSet(viewsets.ModelViewSet):
+    queryset = Servico.objects.all()
+    serializer_class = ServicoSerializer
+    search_fields = ['nome', 'descricao']

@@ -1,9 +1,17 @@
+from django.db.models import fields
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from estabelecimentos.models import Estabelecimento
+from estabelecimentos.models import Estabelecimento, Servico
+
 
 class EstabelecimentoSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Estabelecimento
+        fields = '__all__'
+
+
+class ServicoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Servico
         fields = '__all__'

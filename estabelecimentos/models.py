@@ -4,7 +4,9 @@ from users.models import Proprietario
 
 
 class Estabelecimento(models.Model):
-    proprietario = models.ForeignKey(Proprietario, on_delete=models.CASCADE, related_name='estabelecimentos')
+
+    proprietario = models.ForeignKey(
+        Proprietario, on_delete=models.CASCADE, related_name='estabelecimentos')
     nome = models.CharField('Nome', max_length=250)
     cnpj = models.CharField('CNPJ', max_length=25)
     cidade = models.CharField('Cidade', max_length=250)
@@ -19,3 +21,14 @@ class Estabelecimento(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Servico(models.Model):
+
+    nome = models.CharField(max_length=250)
+    descricao = models.TextField(blank=True, null=True)
+    preco = models.FloatField()
+    duracao = models.IntegerField()
+
+    def __str__(self):
+        return self.name
