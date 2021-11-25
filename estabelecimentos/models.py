@@ -14,6 +14,8 @@ class Estabelecimento(models.Model):
     rua = models.CharField('Rua', max_length=250)
     numero = models.CharField('Numero', max_length=250)
     cep = models.CharField('CEP', max_length=15)
+    horario_inicio = models.TimeField()
+    horario_final = models.TimeField()
     telefone = models.CharField('CEP', max_length=50)
     latitude = models.CharField('Latitude', max_length=100)
     longitude = models.CharField('Longitude', max_length=100)
