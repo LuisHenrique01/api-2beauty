@@ -1,15 +1,14 @@
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
-from estabelecimentos.models import Estabelecimento, Servico
-from .serializers import EstabelecimentoSerializer, ServicoSerializer
+from estabelecimentos.models import Agenda, Estabelecimento, Servico
+from .serializers import AgendaSerializer, EstabelecimentoSerializer, ServicoSerializer
 from users.models import Proprietario
 
 
 class EstabelecimentoViewSet(viewsets.ModelViewSet):
     queryset = Estabelecimento.objects.all()
     serializer_class = EstabelecimentoSerializer
-    filterset_fields = ['user']
     search_fields = ['nome', 'cidade', 'bairro', 'rua']
 
     def create(self, request, *args, **kwargs):
@@ -27,3 +26,8 @@ class ServicoViewSet(viewsets.ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer
     search_fields = ['nome', 'descricao']
+
+
+class AgendaViewSet(viewsets.ModelViewSet):
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer

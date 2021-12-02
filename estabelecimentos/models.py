@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Proprietario
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -34,3 +35,31 @@ class Servico(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Horarios(models.Model):
+
+    cliente = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='clientes')
+    servico = models.ForeignKey(
+        Servico, on_delete=models.CASCADE, related_name='servicos')
+    inicio = models.DateTimeField()
+    fim = models.DateTimeField()
+
+    class Meta:
+        verbose_name = "Horarios"
+        verbose_name_plural = "Horarios"
+
+    def __str__(self):
+        return f'{self.cliente}'
+
+
+class Agenda(models.Model):
+
+    estabelecimento = models.OneToOneField(
+        Estabelecimento, on_delete=models.CASCADE)
+    horarios = models.ForeignKey(
+        Horarios, on_delete=models.CASCADE, related_name='horarios')
+
+    def __str__(self):
+        return f'{self.estabelecimento}'
