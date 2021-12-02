@@ -21,7 +21,7 @@ class UserChangePasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['password']
 
     def update(self, instance, validated_data):
         instance.set_password(validated_data.get('password'))
@@ -34,20 +34,15 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'first_name', 'email']
 
-    def update(self, instance, validated_data):
-        instance.set_password(validated_data.get('password'))
-        return instance
-
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'email']
+        fields = ['id']
 
 
 class ProprietarioSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Proprietario

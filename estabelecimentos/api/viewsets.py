@@ -14,7 +14,7 @@ class EstabelecimentoViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         user = request.user
-        data['proprietario'] = Proprietario.objects.get(user=user)
+        data['proprietario'] = Proprietario.objects.get(user=user).id
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -25,9 +25,11 @@ class EstabelecimentoViewSet(viewsets.ModelViewSet):
 class ServicoViewSet(viewsets.ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer
+    filterset_fields = ['estabelecimento']
     search_fields = ['nome', 'descricao']
 
 
-class AgendaViewSet(viewsets.ModelViewSet):
+class HorarioCreate(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
+    filterset_fields = ['estabelecimento']

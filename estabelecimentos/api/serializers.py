@@ -9,6 +9,11 @@ class EstabelecimentoSerializer(serializers.ModelSerializer):
         model = Estabelecimento
         fields = '__all__'
 
+    def create(self, validated_data):
+        estabelecimento = Estabelecimento.objects.create(**validated_data)
+        Agenda.objects.create(estabelecimento=estabelecimento)
+        return estabelecimento
+
 
 class ServicoSerializer(serializers.ModelSerializer):
 
@@ -18,8 +23,6 @@ class ServicoSerializer(serializers.ModelSerializer):
 
 
 class HorarioSerializer(serializers.ModelSerializer):
-    cliente = UserSerializer()
-    servico = ServicoSerializer()
 
     class Meta:
         model = Horarios
@@ -32,9 +35,3 @@ class AgendaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agenda
         fields = '__all__'
-
-    def create(self, validated_data):
-        horario_data = validated_data.pop('horarios')
-        horario = Horarios.objects.create(**horario_data)
-        Agenda.objects.create(horarios=horario, **validated_data)
-        return horario

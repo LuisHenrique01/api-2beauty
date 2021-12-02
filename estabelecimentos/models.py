@@ -28,6 +28,8 @@ class Estabelecimento(models.Model):
 
 class Servico(models.Model):
 
+    estabelecimento = models.ForeignKey(
+        Estabelecimento, on_delete=models.CASCADE, related_name='servicos')
     nome = models.CharField(max_length=250)
     descricao = models.TextField(blank=True, null=True)
     preco = models.FloatField()
@@ -37,12 +39,23 @@ class Servico(models.Model):
         return self.name
 
 
+class Agenda(models.Model):
+
+    estabelecimento = models.OneToOneField(
+        Estabelecimento, on_delete=models.CASCADE, related_name='agenda')
+
+    def __str__(self):
+        return f'{self.estabelecimento}'
+
+
 class Horarios(models.Model):
 
+    agenda = models.ForeignKey(
+        Agenda, on_delete=models.CASCADE, related_name='horarios')
     cliente = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='clientes')
+        User, on_delete=models.CASCADE, related_name='horarios')
     servico = models.ForeignKey(
-        Servico, on_delete=models.CASCADE, related_name='servicos')
+        Servico, on_delete=models.CASCADE, related_name='horarios')
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
 
@@ -52,14 +65,3 @@ class Horarios(models.Model):
 
     def __str__(self):
         return f'{self.cliente}'
-
-
-class Agenda(models.Model):
-
-    estabelecimento = models.OneToOneField(
-        Estabelecimento, on_delete=models.CASCADE)
-    horarios = models.ForeignKey(
-        Horarios, on_delete=models.CASCADE, related_name='horarios')
-
-    def __str__(self):
-        return f'{self.estabelecimento}'

@@ -24,24 +24,26 @@ from drf_yasg import openapi
 ...
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="2Beauty API",
-      default_version='v1',
-      description="Essa API foi desenvolvida única e exclusivamente para a aplicação móvel e descktop do 2Beauty.",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="luisrocha1201@gmail.local"),
-      license=openapi.License(name="BSD License"),
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
+    openapi.Info(
+        title="2Beauty API",
+        default_version='v1',
+        description="Essa API foi desenvolvida única e exclusivamente para a aplicação móvel e descktop do 2Beauty.",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="luisrocha1201@gmail.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
 )
 
 
 urlpatterns = [
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('', schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc',
+         cache_timeout=0), name='schema-redoc'),
     path('user/', include('users.urls')),
-    path('estabelecimento/', include('estabelecimentos.urls')),
+    path('', include('estabelecimentos.urls')),
     path('api/token/', TokenObtainPairView.as_view(),),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('admin/', admin.site.urls)
