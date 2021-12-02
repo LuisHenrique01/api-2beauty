@@ -28,10 +28,32 @@ class HorarioSerializer(serializers.ModelSerializer):
         model = Horarios
         fields = '__all__'
 
+    def is_valid_horario(self):
+        validated_data = self.validated_data
+        agenda = Horarios.objects.filter(
+            agenda=validated_data['agenda'],
+            cliente=validated_data['cliente'],
+            servico=validated_data['servico'],
+            data=validated_data['data'],
+            horario__gte=validated_data['horario'],
+            horario_termino__lte=validated_data['horario_termino']
+        )
+        estabelecimento = Estabelecimento.objects.get(
+            agenda=validated_data['agenda'])
+        if estabelecimento.horario_inicio < validated_data['horario'] \
+                or estabelecimento.horario_final >= validated_data['horario']:
+            raise serializers.ValidationError(
+                {'error': 'Fora do horário de atendimento!'})
+        if len(agenda) >= validated_data['servico'].qtd_atendentes:
+            raise serializers.ValidationError(
+                {'error': 'Horário indisponível!'})
+        return True
+
 
 class AgendaSerializer(serializers.ModelSerializer):
-    horarios = HorarioSerializer()
+    estabelecimento = EstabelecimentoSerializer()
+    horarios = HorarioSerializer(many=True)
 
     class Meta:
         model = Agenda
-        fields = '__all__'
+        fields = ['estabelecimento', 'horarios']

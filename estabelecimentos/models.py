@@ -34,9 +34,10 @@ class Servico(models.Model):
     descricao = models.TextField(blank=True, null=True)
     preco = models.FloatField()
     duracao = models.IntegerField()
+    qtd_atendentes = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.nome
 
 
 class Agenda(models.Model):
@@ -56,8 +57,9 @@ class Horarios(models.Model):
         User, on_delete=models.CASCADE, related_name='horarios')
     servico = models.ForeignKey(
         Servico, on_delete=models.CASCADE, related_name='horarios')
-    inicio = models.DateTimeField()
-    fim = models.DateTimeField()
+    data = models.DateField()
+    horario = models.TimeField()
+    horario_termino = models.TimeField()
 
     class Meta:
         verbose_name = "Horarios"
