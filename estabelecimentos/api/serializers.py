@@ -40,8 +40,8 @@ class HorarioSerializer(serializers.ModelSerializer):
         )
         estabelecimento = Estabelecimento.objects.get(
             agenda=validated_data['agenda'])
-        if estabelecimento.horario_inicio < validated_data['horario'] \
-                or estabelecimento.horario_final >= validated_data['horario']:
+        if not (estabelecimento.horario_inicio < validated_data['horario']
+                or estabelecimento.horario_final >= validated_data['horario']):
             raise serializers.ValidationError(
                 {'error': 'Fora do horário de atendimento!'})
         if len(agenda) >= validated_data['servico'].qtd_atendentes:
