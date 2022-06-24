@@ -17,7 +17,7 @@ class EstabelecimentoViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         user = request.user
-        data['proprietario'] = Proprietario.objects.get(user=user).id
+        data['proprietario'] = Proprietario.objects.get(user__id=user.id).id
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
