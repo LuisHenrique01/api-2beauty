@@ -25,13 +25,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Export SECURITY KEY for tests
-      run: |
-        export SECRET_KEY=${{ secrets.SECRET_KEY }}
-        export DEBUG=${{ secrets.DEBUG }}
     - name: Lint with flake8
       run: |
         flake8 .
     - name: Test with pytest
       run: |
+        # Export SECURITY KEY for tests
+        export SECRET_KEY=${{ secrets.SECRET_KEY }}
+        export DEBUG=${{ secrets.DEBUG }}
         pytest
