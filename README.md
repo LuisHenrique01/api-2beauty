@@ -16,7 +16,6 @@ Um aplicativo mobile que salões possam se cadastrar e elementalmente seus princ
 Engenharia.
 - Engenharia de Software III - Metodologia ágil (SCRUM).
 - Programação para Internet II- React, Django REST Framework (Como o projeto é mais mobile provavelmente vamos mudar para Flutter usado em Programação para Dispositivos Moveis).
-- Redes de Computadores - Chalice AWS (Uma possibilidade é disponibilizar a API usando computação em nuvem).
 
 ## Funcionalidades
 - Cliente: realizar cadastro ou login
