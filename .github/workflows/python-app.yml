@@ -35,4 +35,4 @@ jobs:
       run: |
         export SECRET_KEY=${{ secrets.SECRET_KEY }}
         export DEBUG=${{ secrets.DEBUG }}
-        pytest
+        pytest --cov --cov-config=pytest.ini
