@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .api.viewsets import UserCreate, UserDetail, UserChangePassword, \
     ProprietarioCreate, ProprietarioDetail
 

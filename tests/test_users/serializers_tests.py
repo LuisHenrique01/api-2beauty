@@ -1,7 +1,7 @@
-from cgi import print_form
 import pytest
 from django.forms.models import model_to_dict
-from users.api.serializers import ProprietarioSerializer, UserChangePasswordSerializer, UserCreateSerializer, UserDetailSerializer
+from users.api.serializers import ProprietarioSerializer, UserChangePasswordSerializer
+from users.api.serializers import UserCreateSerializer, UserDetailSerializer
 
 pytestmark = pytest.mark.unit
 

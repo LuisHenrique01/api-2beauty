@@ -1,0 +1,3 @@
+[flake8]
+max-line-length=128
+exclude=*/migrations/*,.git,__pycache__,docs/source/conf.py,old,build,dist,./venv,./beauty/test_settings.py,./beauty/settings.py

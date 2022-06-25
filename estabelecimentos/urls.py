@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .api.viewsets import AgendaList, AgendaList, EstabelecimentoViewSet, HorarioCreate, HorarioDetail, ServicoViewSet
+from .api.viewsets import AgendaList, EstabelecimentoViewSet, HorarioCreate, HorarioDetail, ServicoViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
