@@ -2,6 +2,7 @@ import datetime
 import factory
 
 from django.contrib.auth.models import User
+
 from users.models import Proprietario
 
 
@@ -14,12 +15,6 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = User
-
-    @factory.post_generation
-    def user_related_model(obj, create, extracted, **kwargs):
-        if not create:
-            return None
-        ProprietarioFactory.create(user=obj)
 
 
 class ProprietarioFactory(factory.django.DjangoModelFactory):
