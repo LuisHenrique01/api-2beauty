@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics
 from rest_framework import status
 from rest_framework.response import Response
 from estabelecimentos.models import Agenda, Estabelecimento, Servico, Horarios
+from django.core.exceptions import ObjectDoesNotExist
 from .serializers import AgendaSerializer, EstabelecimentoSerializer, HorarioSerializer, ServicoSerializer
 from users.models import Proprietario
 from estabelecimentos.utils import get_horario_termino
@@ -14,14 +15,18 @@ class EstabelecimentoViewSet(viewsets.ModelViewSet):
     search_fields = ['nome', 'cidade', 'bairro', 'rua']
 
     def create(self, request, *args, **kwargs):
-        data = request.data
-        user = request.user
-        data['proprietario'] = Proprietario.objects.get(user=user).id
-        serializer = self.get_serializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        try:
+            data = request.data
+            user = request.user
+            data['proprietario'] = Proprietario.objects.get(
+                user__id=user.id).id
+            serializer = self.get_serializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        except ObjectDoesNotExist:
+            return Response({'error': 'User is not an owner'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class ServicoViewSet(viewsets.ModelViewSet):
