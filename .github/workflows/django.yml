@@ -22,16 +22,16 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
+        export SECRET_KEY="$SECRET_KEY"
+        export DEBUG=${{ secrets.DEBUG }}
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         flake8 .
     - name: Test with pytest
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        export SECRET_KEY="$SECRET_KEY"
-        export DEBUG=${{ secrets.DEBUG }}
-        pytest
+        pytest --cov --cov-config=pytest.ini
