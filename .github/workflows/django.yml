@@ -27,8 +27,8 @@ jobs:
         pip install -r requirements.txt
     - name: Export SECURITY KEY for tests
       run: |
-        export SECRET_KEY=965af87a227f07df2366b25768fa8b82
-        export DEBUG=True
+        export SECRET_KEY=${{ SECRET_KEY }}
+        export DEBUG=${{ DEBUG }}
     - name: Lint with flake8
       run: |
         flake8 .
