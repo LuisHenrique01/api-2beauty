@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from users.models import Proprietario
-from django.forms.models import model_to_dict
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
@@ -33,13 +32,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'email']
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['id']
 
 
 class ProprietarioSerializer(serializers.ModelSerializer):

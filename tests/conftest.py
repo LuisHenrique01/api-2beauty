@@ -16,3 +16,13 @@ def simple_user():
 @pytest.fixture
 def proprietario_user():
     return ProprietarioFactory()
+
+
+@pytest.fixture
+def simple_user_buider():
+    return UserFactory.build()
+
+
+@pytest.fixture
+def proprietario_user_buider():
+    return ProprietarioFactory.build()

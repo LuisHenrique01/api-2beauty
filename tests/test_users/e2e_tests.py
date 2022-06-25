@@ -61,4 +61,8 @@ class TestProprietarioEndpoints:
         assert response.status_code == 200
         assert list(dict(response.json())) == expected_dict_keys
 
-    # def test_user_change_password(self):
+    def test_user_change_password(self, api_client, simple_user):
+        client = api_client()
+        client.force_authenticate(simple_user)
+        response = client.patch(reverse('change-password'))
+        assert response.status_code == 200

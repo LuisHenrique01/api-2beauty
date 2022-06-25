@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from estabelecimentos.models import Estabelecimento, Servico, Agenda, Horarios
-from users.api.serializers import UserSerializer
 
 
 class EstabelecimentoSerializer(serializers.ModelSerializer):
