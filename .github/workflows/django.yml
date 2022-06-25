@@ -29,8 +29,9 @@ jobs:
       run: |
         flake8 .
     - name: Test with pytest
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        # Export SECURITY KEY for tests
-        export SECRET_KEY=${{ secrets.SECRET_KEY }}
+        export SECRET_KEY="$SECRET_KEY"
         export DEBUG=${{ secrets.DEBUG }}
         pytest
