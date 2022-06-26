@@ -32,4 +32,3 @@ jobs:
       run: |
         export SECRET_KEY=${{ secrets.SECRET_KEY }}
         export DEBUG=${{ secrets.SECRET_KEY }}
-        pytest --ds=beauty.test_settings
