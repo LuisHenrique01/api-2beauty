@@ -34,7 +34,4 @@ jobs:
         flake8 .
     - name: Run Tests
       run: |
-        SECRET_KEY=${{ env.SECRET_KEY }}
-        DEBUG=${{ env.SECRET_KEY }}
-        echo $DEBUG
         python manage.py test
