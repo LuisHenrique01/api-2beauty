@@ -36,5 +36,5 @@ jobs:
       run: |
         SECRET_KEY=${{ env.SECRET_KEY }}
         DEBUG=${{ env.SECRET_KEY }}
-        printevn DEBUG
+        echo $DEBUG
         python manage.py test
