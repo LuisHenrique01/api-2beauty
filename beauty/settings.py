@@ -152,5 +152,7 @@ STATIC_ROOT = BASE_DIR / 'staticfile'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+TEST_RUNNER = 'beauty.runner.PytestTestRunner'
 if not DEBUG:
     django_heroku.settings(locals())
