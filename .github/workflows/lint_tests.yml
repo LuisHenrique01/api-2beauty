@@ -34,4 +34,6 @@ jobs:
         flake8 .
     - name: Run Tests
       run: |
+        echo "SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
+        echo "DEBUG=$DEBUG" >> $GITHUB_ENV
         python manage.py test
