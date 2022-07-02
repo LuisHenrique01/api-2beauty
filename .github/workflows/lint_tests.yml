@@ -1,0 +1,39 @@
+name: Lint and Tests CI
+
+on:
+  push:
+    branches: [ "main", "release/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DEBUG: ${{ secrets.SECRET_KEY }}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Lint test
+      run: |
+        flake8 .
+    - name: Run Tests
+      run: |
+        echo "SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
+        echo "DEBUG=$DEBUG" >> $GITHUB_ENV
+        python manage.py test

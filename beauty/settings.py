@@ -13,6 +13,7 @@ import django_heroku
 import os
 from datetime import timedelta
 from pathlib import Path
+import secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # Para não precisar exportar toda hora a secret key
 SECRET_KEY = os.environ.get('SECRET_KEY')
+if len(SECRET_KEY) == 0:
+    SECRET_KEY = secrets.token_hex(20)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = not bool(os.environ.get('DEBUG') == 'False')
 
 ALLOWED_HOSTS = ['beauty-2.herokuapp.com', '127.0.0.1']
 
@@ -152,5 +155,7 @@ STATIC_ROOT = BASE_DIR / 'staticfile'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+TEST_RUNNER = 'beauty.runner.PytestTestRunner'
 if not DEBUG:
     django_heroku.settings(locals())
